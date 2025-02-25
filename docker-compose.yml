@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app  
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/mydatabase
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
