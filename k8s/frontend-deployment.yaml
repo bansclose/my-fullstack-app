@@ -1,12 +1,26 @@
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: backend-service
+  name: frontend
 spec:
+  replicas: 2
   selector:
-    app: backend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3001
-  type: ClusterIP
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: scofieldtt/my-fullstack-frontend:latest  # Thay bằng image frontend của bạn
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

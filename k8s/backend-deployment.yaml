@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: scofieldtt/backend:latest
+        image: scofieldtt/my-fullstack-backend:latest
         ports:
         - containerPort: 3001
         resources:
